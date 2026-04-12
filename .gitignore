@@ -1,0 +1,16 @@
+# Environment variables — never commit secrets
+.env
+
+# SQLite databases
+*.db
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
