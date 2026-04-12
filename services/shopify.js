@@ -5,6 +5,7 @@
  * Both server.js and route files import from here — avoids circular deps.
  */
 
+import "dotenv/config";
 import { shopifyApp } from "@shopify/shopify-app-express";
 import { SQLiteSessionStorage } from "@shopify/shopify-app-session-storage-sqlite";
 import { ApiVersion } from "@shopify/shopify-api";
