@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "shopify-dev": {
+      "command": "npx",
+      "args": ["-y", "@shopify/dev-mcp@latest"],
+      "env": {
+        "SHOPIFY_API_KEY": "${SHOPIFY_API_KEY}",
+        "SHOPIFY_API_SECRET": "${SHOPIFY_API_SECRET}"
+      }
+    }
+  }
+}

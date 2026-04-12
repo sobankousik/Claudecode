@@ -1,0 +1,22 @@
+{
+  "name": "shopify-ai-toolkit",
+  "owner": {
+    "name": "sobankousik",
+    "repo": "https://github.com/sobankousik/Shopify-AI-Toolkit"
+  },
+  "metadata": {
+    "description": "Shopify developer tools for Claude Code — connected via git submodule"
+  },
+  "plugins": [
+    {
+      "name": "shopify-plugin",
+      "source": "./shopify-ai-toolkit",
+      "description": "Search Shopify docs, generate and validate GraphQL, Liquid, and UI extension code",
+      "version": "1.0.0",
+      "author": { "name": "Shopify" },
+      "license": "MIT",
+      "homepage": "https://github.com/sobankousik/Shopify-AI-Toolkit",
+      "keywords": ["shopify", "mcp", "graphql", "liquid", "storefront", "admin-api"]
+    }
+  ]
+}
