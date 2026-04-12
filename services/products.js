@@ -7,7 +7,7 @@
  *   - write an audit log entry after the operation
  */
 
-import { shopify } from "../server.js";
+import { shopify } from "./shopify.js";
 import { saveSnapshot } from "./snapshots.js";
 import { logWrite } from "./audit.js";
 

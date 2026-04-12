@@ -9,7 +9,7 @@
  */
 
 import { Router } from "express";
-import { shopify } from "../server.js";
+import { shopify } from "../services/shopify.js";
 import { logWrite } from "../services/audit.js";
 
 const router = Router();

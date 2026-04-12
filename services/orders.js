@@ -5,7 +5,7 @@
  * Cancel is treated as a destructive action — it snapshots before executing.
  */
 
-import { shopify } from "../server.js";
+import { shopify } from "./shopify.js";
 import { saveSnapshot } from "./snapshots.js";
 import { logWrite } from "./audit.js";
 

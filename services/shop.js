@@ -3,7 +3,7 @@
  * Returns metadata about the connected Shopify store.
  */
 
-import { shopify } from "../server.js";
+import { shopify } from "./shopify.js";
 
 export async function getShopInfo(session) {
   const { body } = await new shopify.api.clients.Rest({ session }).get({

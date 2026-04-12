@@ -14,7 +14,7 @@
 
 import { v4 as uuidv4 } from "uuid";
 import { stmts } from "./db.js";
-import { shopify } from "../server.js";
+import { shopify } from "./shopify.js";
 
 /**
  * Save a snapshot of a resource before it is modified.

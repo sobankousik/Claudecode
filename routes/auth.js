@@ -7,7 +7,7 @@
  */
 
 import { Router } from "express";
-import { shopify } from "../server.js";
+import { shopify } from "../services/shopify.js";
 
 const router = Router();
 
