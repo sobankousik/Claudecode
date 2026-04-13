@@ -17,6 +17,31 @@
       "license": "MIT",
       "homepage": "https://github.com/sobankousik/Shopify-AI-Toolkit",
       "keywords": ["shopify", "mcp", "graphql", "liquid", "storefront", "admin-api"]
+    },
+    {
+      "name": "shopify-admin-skills",
+      "source": "./shopify-admin-skills",
+      "description": "63 AI agent skills for operating a Shopify store — cart recovery, pricing, inventory, orders, returns, finance, and more",
+      "version": "1.0.0",
+      "author": { "name": "sobankousik" },
+      "license": "MIT",
+      "homepage": "https://github.com/sobankousik/shopify-admin-skills",
+      "keywords": ["shopify", "skills", "admin", "orders", "inventory", "merchandising", "fulfillment", "returns", "finance", "marketing"],
+      "skills": {
+        "total": 63,
+        "categories": [
+          "conversion-optimization",
+          "customer-ops",
+          "customer-support",
+          "finance",
+          "fulfillment-ops",
+          "marketing",
+          "merchandising",
+          "order-intelligence",
+          "returns",
+          "store-management"
+        ]
+      }
     }
   ]
 }

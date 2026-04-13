@@ -7,6 +7,7 @@ Connects directly to a Shopify store and the Shopify AI Toolkit — letting an e
 
 - **`/plugin`** — Core API gateway to a connected Shopify store
 - **Shopify AI Toolkit** — 16 skill modules (Admin, Storefront, Orders, Liquid, GraphQL, Polaris, Hydrogen, and more) connected via git submodule at `shopify-ai-toolkit/`
+- **Shopify Admin Skills** — 63 operational skills (cart recovery, pricing, inventory, orders, returns, finance, and more) connected via git submodule at `shopify-admin-skills/`
 - **MCP Server** — Shopify Dev MCP wired in `.mcp.json` for live doc search and API schema access inside Claude Code
 
 ## Guardrails
@@ -43,6 +44,7 @@ POST /plugin/confirm/:token     → execute a pending confirmation
 - **Auth:** Shopify OAuth (session stored in `sessions.db`)
 - **Guardrails DB:** SQLite (`guardrails.db`) via `better-sqlite3`
 - **Plugin Toolkit:** `shopify-ai-toolkit/` (git submodule → sobankousik/Shopify-AI-Toolkit)
+- **Admin Skills:** `shopify-admin-skills/` (git submodule → sobankousik/shopify-admin-skills, 63 skills across 10 categories)
 
 ## Setup
 
