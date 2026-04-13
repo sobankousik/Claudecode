@@ -25,6 +25,11 @@
  *  GET    /plugin/orders/:id              → single order
  *  POST   /plugin/orders/:id/cancel       → cancel  [confirmation required]
  *
+ *  GET    /plugin/skills                         → catalog of all 63 skills
+ *  GET    /plugin/skills/:category               → skills in one category
+ *  GET    /plugin/skills/:category/:name         → full skill detail + SKILL.md
+ *  POST   /plugin/skills/:category/:name/graphql → run a skill GraphQL op  [dry_run + confirmation]
+ *
  *  GET    /plugin/marketplace             → toolkit + app store info
  *  GET    /plugin/marketplace/search      → search Shopify App Store
  *
@@ -44,8 +49,13 @@ import { getShopInfo } from "../services/shop.js";
 import { getAuditLog } from "../services/audit.js";
 import { listSnapshots, restoreSnapshot } from "../services/snapshots.js";
 import { stmts } from "../services/db.js";
+import skillsRouter from "./skills.js";
 
 const router = Router();
+
+// ─── Skills (63 Shopify Admin Skills with guardrails) ─────────────────────────
+// Mounted before other routes so /plugin/confirm re-dispatch covers skill mutations.
+router.use("/skills", skillsRouter);
 
 // ─── Plugin root ──────────────────────────────────────────────────────────────
 
@@ -67,6 +77,7 @@ router.get("/", async (_req, res) => {
       shop: "/plugin/shop",
       products: "/plugin/products",
       orders: "/plugin/orders",
+      skills: "/plugin/skills",
       marketplace: "/plugin/marketplace",
       audit: "/plugin/audit",
       snapshots: "/plugin/snapshots",
