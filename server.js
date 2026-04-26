@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { shopify } from "./services/shopify.js";
 import authRouter from "./routes/auth.js";
 import pluginRouter from "./routes/plugin.js";
+import skillsRouter from "./routes/skills.js";
 import webhookRouter from "./routes/webhooks.js";
 
 // ─── Express setup ────────────────────────────────────────────────────────────
@@ -34,6 +35,7 @@ app.get(
 app.use("/api/auth", authRouter);
 app.use("/api/webhooks", webhookRouter);
 app.use("/plugin", shopify.validateAuthenticatedSession(), pluginRouter);
+app.use("/plugin/skills", shopify.validateAuthenticatedSession(), skillsRouter);
 app.get("/health", (_req, res) => res.json({ status: "ok" }));
 
 // ─── Global error handler ─────────────────────────────────────────────────────
