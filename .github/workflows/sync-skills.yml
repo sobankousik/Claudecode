@@ -1,0 +1,28 @@
+name: Sync shopify-admin-skills
+
+on:
+  repository_dispatch:
+    types: [skills-updated]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.SKILLS_SYNC_TOKEN }}
+          ref: claude/shopify-dev-setup-8KX7g
+
+      - name: Update shopify-admin-skills submodule
+        run: git submodule update --remote shopify-admin-skills
+
+      - name: Commit updated submodule pointer
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add shopify-admin-skills
+          git diff --cached --quiet || git commit -m "chore: sync shopify-admin-skills to latest"
+
+      - name: Push
+        run: git push origin claude/shopify-dev-setup-8KX7g
