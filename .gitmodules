@@ -1,3 +1,6 @@
 [submodule "shopify-ai-toolkit"]
 	path = shopify-ai-toolkit
 	url = https://github.com/sobankousik/Shopify-AI-Toolkit
+[submodule "shopify-admin-skills"]
+	path = shopify-admin-skills
+	url = https://github.com/sobankousik/shopify-admin-skills
