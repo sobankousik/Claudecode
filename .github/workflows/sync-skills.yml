@@ -7,11 +7,13 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: true
-          token: ${{ secrets.SKILLS_SYNC_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           ref: claude/shopify-dev-setup-8KX7g
 
       - name: Update shopify-admin-skills submodule
