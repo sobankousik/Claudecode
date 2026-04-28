@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopOps AI Agent — SOP | boco.agency</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f4f5f7;
+      color: #1a1a2e;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: #0f0f1a;
+      color: #fff;
+      padding: 48px 64px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .header-left h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    .header-left p {
+      color: #a0a0b8;
+      font-size: 13px;
+    }
+    .badge {
+      background: #5b4fff;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-top: 4px;
+      display: inline-block;
+    }
+    .header-right {
+      text-align: right;
+    }
+    .header-right .agency {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+    .header-right .agency span { color: #5b4fff; }
+    .header-right p {
+      color: #a0a0b8;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── Intro Banner ── */
+    .intro-banner {
+      background: #fff;
+      border-left: 4px solid #5b4fff;
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-bottom: 36px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .intro-banner p { color: #444; margin-bottom: 8px; }
+    .intro-banner p:last-child { margin-bottom: 0; }
+    .intro-banner strong { color: #0f0f1a; }
+
+    /* ── Section ── */
+    .section {
+      background: #fff;
+      border-radius: 10px;
+      padding: 32px 36px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #eee;
+    }
+    .step-num {
+      background: #5b4fff;
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .step-icon {
+      background: #f0eeff;
+      color: #5b4fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .section h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0f0f1a;
+    }
+    .section h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f0f1a;
+      margin: 20px 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .section p { color: #444; margin-bottom: 12px; }
+
+    /* ── Flow diagram ── */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+    .flow-step {
+      background: #f0eeff;
+      border: 1.5px solid #d4ccff;
+      color: #3b2fd9;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .flow-arrow {
+      color: #5b4fff;
+      font-size: 18px;
+      padding: 0 8px;
+    }
+
+    /* ── Two-column needs ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .need-card {
+      background: #f8f8ff;
+      border: 1.5px solid #e0deff;
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+    .need-card .label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #5b4fff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .need-card p { font-size: 13px; color: #444; margin: 0; }
+
+    /* ── Example phrases ── */
+    .phrase-group { margin-bottom: 18px; }
+    .phrase-group h3 { margin-top: 0; margin-bottom: 8px; }
+    .phrase {
+      background: #f8f8ff;
+      border-left: 3px solid #5b4fff;
+      padding: 8px 14px;
+      border-radius: 0 6px 6px 0;
+      font-style: italic;
+      color: #333;
+      font-size: 13.5px;
+      margin-bottom: 6px;
+    }
+
+    /* ── Checklist ── */
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f2f2f2;
+      font-size: 14px;
+      color: #333;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .check-box {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #d0d0e0;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── Safety cards ── */
+    .safety-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 8px;
+    }
+    .safety-card {
+      background: #f8f8ff;
+      border: 1.5px solid #e0deff;
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+    .safety-card .icon { font-size: 22px; margin-bottom: 8px; }
+    .safety-card h4 { font-size: 13px; font-weight: 700; color: #0f0f1a; margin-bottom: 6px; }
+    .safety-card p { font-size: 13px; color: #555; margin: 0; }
+
+    /* ── Skills grid ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .skill-pill {
+      background: #f4f5f7;
+      border: 1px solid #e8e8f0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 13px;
+    }
+    .skill-pill strong { color: #5b4fff; display: block; margin-bottom: 2px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .skill-pill span { color: #555; }
+
+    /* ── Workflow steps ── */
+    .workflow { margin-bottom: 20px; }
+    .workflow h4 { font-size: 14px; font-weight: 700; color: #0f0f1a; margin-bottom: 10px; }
+    .wf-step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .wf-num {
+      background: #0f0f1a;
+      color: #fff;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .wf-step p { font-size: 13.5px; color: #333; margin: 0; }
+    .wf-step em { font-style: italic; color: #5b4fff; }
+
+    /* ── Don'ts ── */
+    .dont-list { list-style: none; }
+    .dont-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid #f2f2f2;
+      font-size: 14px;
+      color: #333;
+    }
+    .dont-list li:last-child { border-bottom: none; }
+    .dont-icon { color: #e53e3e; font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Roles table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    th {
+      background: #0f0f1a;
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    td {
+      padding: 11px 14px;
+      border-bottom: 1px solid #eee;
+      color: #333;
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #f9f9fc; }
+
+    /* ── Quick ref ── */
+    .ref-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .ref-item {
+      background: #f4f5f7;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 13px;
+    }
+    .ref-item .key { font-weight: 700; color: #0f0f1a; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 3px; }
+    .ref-item .val { font-family: monospace; color: #5b4fff; font-size: 13px; }
+
+    .phrase-ref {
+      background: #f8f8ff;
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+    .phrase-ref h4 { font-size: 13px; font-weight: 700; color: #0f0f1a; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .phrase-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .phrase-row:last-child { margin-bottom: 0; }
+    .pr-cmd { font-family: monospace; background: #e8e4ff; color: #3b2fd9; padding: 2px 8px; border-radius: 4px; flex-shrink: 0; }
+    .pr-desc { color: #555; }
+
+    /* ── Footer ── */
+    .footer {
+      background: #0f0f1a;
+      color: #a0a0b8;
+      text-align: center;
+      padding: 28px 40px;
+      font-size: 13px;
+      margin-top: 40px;
+    }
+    .footer strong { color: #fff; }
+    .footer a { color: #5b4fff; text-decoration: none; }
+
+    @media print {
+      body { background: #fff; }
+      .header { padding: 32px 40px; }
+      .container { margin: 20px auto; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <h1>ShopOps AI Agent</h1>
+    <p>Standard Operating Procedure &nbsp;·&nbsp; Store Managers & Clients</p>
+    <span class="badge">Version 1.0 &nbsp;·&nbsp; April 2026</span>
+  </div>
+  <div class="header-right">
+    <div class="agency">boco<span>.</span>agency</div>
+    <p>soban@boco.agency</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Intro -->
+  <div class="intro-banner">
+    <p><strong>ShopOps</strong> is an AI-powered operations system connected directly to your Shopify store. Instead of clicking through the admin for every task, you talk to an AI agent in plain English — and it does the work for you.</p>
+    <p>It can handle <strong>79 tasks</strong> across products, orders, inventory, customers, discounts, and more. <strong>You do not need to be technical to use it.</strong></p>
+  </div>
+
+  <!-- What you need -->
+  <div class="section">
+    <div class="section-header">
+      <div class="step-icon">🔑</div>
+      <h2>The Two Things You Need</h2>
+    </div>
+    <div class="two-col">
+      <div class="need-card">
+        <div class="label">01 — Claude</div>
+        <p>The AI you talk to. Available at claude.ai. Your agency will set up your account.</p>
+      </div>
+      <div class="need-card">
+        <div class="label">02 — ShopOps Plugin</div>
+        <p>Pre-connected to your store by your agency. Gives Claude the ability to act on Shopify.</p>
+      </div>
+    </div>
+    <p style="margin-top:16px; font-size:13px; color:#777;">Your agency (boco.agency) handles all setup. You do not need to install anything on your computer.</p>
+  </div>
+
+  <!-- How it works -->
+  <div class="section">
+    <div class="section-header">
+      <div class="step-icon">⚡</div>
+      <h2>How It Works</h2>
+    </div>
+    <div class="flow">
+      <div class="flow-step">You type a request</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Claude reads the right skill</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">ShopOps acts on your store</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Claude reports back</div>
+    </div>
+    <p style="margin-top:14px; font-size:13px; color:#777;">Think of ShopOps as Claude's hands inside your Shopify store.</p>
+  </div>
+
+  <!-- Step 1 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="step-num">1</div>
+      <h2>Getting Access</h2>
+    </div>
+    <p>Your agency will provide:</p>
+    <ul class="checklist">
+      <li><div class="check-box"></div>Your ShopOps URL (e.g. https://your-store-shopops.duckdns.org)</li>
+      <li><div class="check-box"></div>A Claude account or seat at claude.ai</li>
+      <li><div class="check-box"></div>Confirmation that your store is connected and live</li>
+    </ul>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="step-num">2</div>
+      <h2>Your First Conversation</h2>
+    </div>
+    <p>Open Claude and start with this exact phrase:</p>
+    <div class="phrase">"You are connected to my Shopify store via ShopOps. What can you help me with?"</div>
+    <p style="margin-top:12px; font-size:13px; color:#777;">Claude will respond with a list of everything it can do for your store.</p>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="step-num">3</div>
+      <h2>How to Ask for Things</h2>
+    </div>
+    <p>You do not need to learn commands. Just describe what you want in plain English.</p>
+
+    <div class="phrase-group">
+      <h3>📦 Products</h3>
+      <div class="phrase">"Show me all products that are out of stock"</div>
+      <div class="phrase">"Update the price of [Product Name] to $49.99"</div>
+      <div class="phrase">"Create a new product called Linen Tote Bag, price $35, in the Bags collection"</div>
+    </div>
+
+    <div class="phrase-group">
+      <h3>🛒 Orders</h3>
+      <div class="phrase">"Show me all unfulfilled orders from today"</div>
+      <div class="phrase">"How many orders came in this week?"</div>
+      <div class="phrase">"Flag order #1042 — customer says item arrived damaged"</div>
+    </div>
+
+    <div class="phrase-group">
+      <h3>📊 Inventory</h3>
+      <div class="phrase">"Which products have less than 5 units left?"</div>
+      <div class="phrase">"Set stock for [Product Name] to 50 units"</div>
+      <div class="phrase">"Give me a low stock report for all variants"</div>
+    </div>
+
+    <div class="phrase-group">
+      <h3>👥 Customers</h3>
+      <div class="phrase">"Find customer with email john@example.com"</div>
+      <div class="phrase">"How many new customers signed up this month?"</div>
+      <div class="phrase">"Tag all customers who spent over $500 as VIP"</div>
+    </div>
+
+    <div class="phrase-group">
+      <h3>🏷️ Discounts</h3>
+      <div class="phrase">"Create a 20% off discount code called WELCOME20"</div>
+      <div class="phrase">"Turn off all expired discount codes"</div>
+      <div class="phrase">"What discount codes are currently active?"</div>
+    </div>
+
+    <div class="phrase-group">
+      <h3>🗂️ Collections</h3>
+      <div class="phrase">"Add [Product Name] to the Summer Sale collection"</div>
+      <div class="phrase">"Show me everything in the New Arrivals collection"</div>
+    </div>
+  </div>
+
+  <!-- Step 4 Safety -->
+  <div class="section">
+    <div class="section-header">
+      <div class="step-num">4</div>
+      <h2>Safety Rules — Built In Automatically</h2>
+    </div>
+    <p style="margin-bottom:16px;">You do not need to manage these. They are built in to protect your store.</p>
+    <div class="safety-grid">
+      <div class="safety-card">
+        <div class="icon">👁️</div>
+        <h4>Preview Before Changing</h4>
+        <p>Say "preview this first" and Claude shows exactly what will change before doing it.</p>
+      </div>
+      <div class="safety-card">
+        <div class="icon">✋</div>
+        <h4>Deletes Require Confirmation</h4>
+        <p>Claude will never delete or cancel anything without showing you a summary and waiting for your yes.</p>
+      </div>
+      <div class="safety-card">
+        <div class="icon">📋</div>
+        <h4>Every Change Is Logged</h4>
+        <p>Every action is recorded in an audit log. Your agency can see exactly what happened and when.</p>
+      </div>
+      <div class="safety-card">
+        <div class="icon">↩️</div>
+        <h4>Undo Is Available</h4>
+        <p>Every change creates a snapshot. If something goes wrong, your agency can revert it.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 5 Skills -->
+  <div class="section">
+    <div class="section-header">
+      <div class="step-num">5</div>
+      <h2>The 79 Skills at a Glance</h2>
+    </div>
+    <p style="margin-bottom:16px;">You do not need to memorise these — just ask Claude in plain English and it picks the right one.</p>
+
+    <h3>🏪 Store Operations — 63 Skills</h3>
+    <div class="skills-grid">
+      <div class="skill-pill"><strong>Products</strong><span>Create, update, delete, bulk edit, price changes</span></div>
+      <div class="skill-pill"><strong>Orders</strong><span>View, fulfil, cancel, flag, bulk updates</span></div>
+      <div class="skill-pill"><strong>Inventory</strong><span>Stock levels, low stock alerts, bulk adjustments</span></div>
+      <div class="skill-pill"><strong>Customers</strong><span>Search, tag, segment, VIP management</span></div>
+      <div class="skill-pill"><strong>Collections</strong><span>Add/remove products, sort, create collections</span></div>
+      <div class="skill-pill"><strong>Discounts</strong><span>Create codes, bulk disable, expiry management</span></div>
+      <div class="skill-pill"><strong>Fulfillment</strong><span>Tracking, shipping updates, fulfilment status</span></div>
+      <div class="skill-pill"><strong>Analytics</strong><span>Sales reports, top products, conversion summaries</span></div>
+      <div class="skill-pill"><strong>Abandoned Carts</strong><span>View, trigger recovery, segment by value</span></div>
+      <div class="skill-pill"><strong>Metafields</strong><span>Custom data on products, variants, orders</span></div>
+    </div>
+
+    <h3 style="margin-top:24px;">💻 Developer Skills — 16 Skills</h3>
+    <p style="font-size:13px; color:#777; margin-bottom:12px;">Used by your agency's technical team — not for day-to-day store management.</p>
+    <div class="skills-grid">
+      <div class="skill-pill"><strong>Liquid</strong><span>Theme code, section building, logic</span></div>
+      <div class="skill-pill"><strong>GraphQL</strong><span>Advanced Shopify API queries</span></div>
+      <div class="skill-pill"><strong>Polaris</strong><span>Admin UI components</span></div>
+      <div class="skill-pill"><strong>Theme Architecture</strong><span>Section schemas, settings, blocks</span></div>
+    </div>
+  </div>
+
+  <!-- Step 6 Workflows -->
+  <div class="section">
+    <div class="section-header">
+      <div class="step-num">6</div>
+      <h2>Common Ready-to-Run Workflows</h2>
+    </div>
+
+    <div class="workflow">
+      <h4>📦 Weekly Inventory Check</h4>
+      <div class="wf-step"><div class="wf-num">1</div><p>Open Claude and say: <em>"Run a low stock report for all products with less than 10 units"</em></p></div>
+      <div class="wf-step"><div class="wf-num">2</div><p>Claude returns a list of low stock items</p></div>
+      <div class="wf-step"><div class="wf-num">3</div><p>Say: <em>"Export this as a table I can share with my supplier"</em></p></div>
+    </div>
+
+    <div class="workflow">
+      <h4>🏷️ Launch a Sale</h4>
+      <div class="wf-step"><div class="wf-num">1</div><p>Say: <em>"Create a 15% off discount code called FLASH15, valid for 48 hours"</em></p></div>
+      <div class="wf-step"><div class="wf-num">2</div><p>Claude confirms details — you say yes</p></div>
+      <div class="wf-step"><div class="wf-num">3</div><p>Say: <em>"Add all best-selling products to the Summer Sale collection"</em></p></div>
+    </div>
+
+    <div class="workflow">
+      <h4>📬 Order Issue Management</h4>
+      <div class="wf-step"><div class="wf-num">1</div><p>Say: <em>"Show me all orders flagged with shipping issues in the last 7 days"</em></p></div>
+      <div class="wf-step"><div class="wf-num">2</div><p>Say: <em>"Draft a refund note for order #1089"</em></p></div>
+    </div>
+
+    <div class="workflow">
+      <h4>📈 End of Month Report</h4>
+      <div class="wf-step"><div class="wf-num">1</div><p>Say: <em>"Give me a sales summary for April — total revenue, top 5 products, and new customer count"</em></p></div>
+    </div>
+  </div>
+
+  <!-- Step 7 Don'ts -->
+  <div class="section">
+    <div class="section-header">
+      <div class="step-num">7</div>
+      <h2>What Not to Do</h2>
+    </div>
+    <ul class="dont-list">
+      <li><span class="dont-icon">✕</span><span><strong>Do not share your ShopOps URL publicly</strong> — it is connected directly to your live store</span></li>
+      <li><span class="dont-icon">✕</span><span><strong>Do not bulk delete without previewing first</strong> — always say "preview first" before any mass action</span></li>
+      <li><span class="dont-icon">✕</span><span><strong>Do not bypass the confirmation step</strong> — if Claude asks you to confirm before deleting, that is intentional</span></li>
+      <li><span class="dont-icon">✕</span><span><strong>Do not use on a live store for the first time without testing</strong> — ask your agency to test on a dev store first</span></li>
+    </ul>
+  </div>
+
+  <!-- Roles -->
+  <div class="section">
+    <div class="section-header">
+      <div class="step-icon">👤</div>
+      <h2>Roles & Responsibilities</h2>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Responsibility</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Store Manager / Client</strong></td>
+          <td>Day-to-day use — products, orders, customers, discounts</td>
+        </tr>
+        <tr>
+          <td><strong>Agency (boco.agency)</strong></td>
+          <td>Setup, maintenance, new skill deployment, troubleshooting</td>
+        </tr>
+        <tr>
+          <td><strong>Claude</strong></td>
+          <td>Interprets your request and executes via ShopOps</td>
+        </tr>
+        <tr>
+          <td><strong>ShopOps</strong></td>
+          <td>Connects Claude to Shopify — the engine underneath</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Troubleshooting -->
+  <div class="section">
+    <div class="section-header">
+      <div class="step-icon">🔧</div>
+      <h2>Troubleshooting</h2>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Problem</th>
+          <th>What to Do</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Claude says it can't connect to the store</td>
+          <td>Contact your agency — the connection may need refreshing</td>
+        </tr>
+        <tr>
+          <td>A skill ran but nothing changed</td>
+          <td>Check the audit log — ask your agency to review</td>
+        </tr>
+        <tr>
+          <td>Claude doesn't understand your request</td>
+          <td>Be more specific: "Update price of SKU-001 to $29"</td>
+        </tr>
+        <tr>
+          <td>You want to undo a change</td>
+          <td>Stop using that item and contact your agency immediately</td>
+        </tr>
+        <tr>
+          <td>Not sure if an action is safe</td>
+          <td>Add "preview first" or "dry run" before confirming</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Quick Reference -->
+  <div class="section">
+    <div class="section-header">
+      <div class="step-icon">📌</div>
+      <h2>Quick Reference Card</h2>
+    </div>
+    <div class="ref-grid">
+      <div class="ref-item">
+        <div class="key">ShopOps URL</div>
+        <div class="val">trunk-petti-shopops.duckdns.org</div>
+      </div>
+      <div class="ref-item">
+        <div class="key">Your Store</div>
+        <div class="val">trunk-petti.myshopify.com</div>
+      </div>
+      <div class="ref-item">
+        <div class="key">Agency Contact</div>
+        <div class="val">soban@boco.agency</div>
+      </div>
+      <div class="ref-item">
+        <div class="key">Health Check</div>
+        <div class="val">/plugin</div>
+      </div>
+    </div>
+    <div class="phrase-ref">
+      <h4>Power Phrases to Remember</h4>
+      <div class="phrase-row"><span class="pr-cmd">"preview this first"</span><span class="pr-desc">Shows what will change before doing it</span></div>
+      <div class="phrase-row"><span class="pr-cmd">"dry run"</span><span class="pr-desc">Same as preview — no changes made</span></div>
+      <div class="phrase-row"><span class="pr-cmd">"audit log"</span><span class="pr-desc">See everything that has been changed</span></div>
+      <div class="phrase-row"><span class="pr-cmd">"undo the last change"</span><span class="pr-desc">Signals your agency to restore the previous state</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>Prepared by <strong>boco.agency</strong> &nbsp;·&nbsp; <a href="mailto:soban@boco.agency">soban@boco.agency</a> &nbsp;·&nbsp; Version 1.0 &nbsp;·&nbsp; April 2026</p>
+  <p style="margin-top:6px; font-size:12px;">This document is confidential and intended for authorised store staff only.</p>
+</div>
+
+</body>
+</html>
