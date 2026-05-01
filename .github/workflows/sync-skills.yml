@@ -17,7 +17,7 @@ jobs:
         with:
           submodules: recursive
           token: ${{ secrets.GITHUB_TOKEN }}
-          ref: claude/resume-previous-work-hnAKy
+          ref: claude/shopify-plugin-integration-0i4sR
 
       - name: Update shopify-admin-skills submodule to latest
         run: git submodule update --remote shopify-admin-skills
@@ -30,4 +30,4 @@ jobs:
           git diff --cached --quiet || git commit -m "chore: sync shopify-admin-skills to latest"
 
       - name: Push
-        run: git push origin claude/resume-previous-work-hnAKy
+        run: git push origin claude/shopify-plugin-integration-0i4sR
